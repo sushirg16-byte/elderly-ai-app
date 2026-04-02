@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Elderly AI Assistant</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background-color: #f0f8ff;
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input {
+            padding: 8px;
+            margin: 5px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>👴 AI Elderly Care Assistant</h1>
+
+    <h3>Select Symptoms</h3>
+
+<form action="/predict" method="post">
+
+    <label><input type="checkbox" name="fever"> Fever</label>
+    <label><input type="checkbox" name="cough"> Cough</label>
+    <label><input type="checkbox" name="fatigue"> Fatigue</label>
+    <label><input type="checkbox" name="headache"> Headache</label>
+    <label><input type="checkbox" name="cold"> Cold</label>
+    <label><input type="checkbox" name="bodypain"> Body Pain</label>
+    <label><input type="checkbox" name="vomiting"> Vomiting</label>
+    <label><input type="checkbox" name="diarrhea"> Diarrhea</label>
+
+    <br><br>
+    <button type="submit">Check Health</button>
+</form>
+</form>
+
+<br>
+
+<form action="/predict" method="post">
+    <!-- checkboxes -->
+    <button type="submit">Check Health</button>
+</form>
+
+<!-- Result -->
+{% if prediction %}
+    <h3>Result: {{ prediction }}</h3>
+{% endif %}
+
+<!-- Emergency -->
+<form action="/emergency" method="post">
+    <button type="submit">🚨 Emergency Help</button>
+</form>
+
+<!-- Emergency message -->
+{% if emergency_msg %}
+    <h3 style="color:red;">{{ emergency_msg }}</h3>
+{% endif %}
+
+<hr>
+
+<!-- Chat -->
+<h3>💬 Chat with Assistant</h3>
+
+<form action="/chat" method="post">
+    <input type="text" name="msg" placeholder="Type message">
+    <button type="submit">Send</button>
+</form>
+
+<h4>💭 Chat History</h4>
+{% for sender, message in chat_history %}
+    <p><b>{{ sender }}:</b> {{ message }}</p>
+{% endfor %}
+
+</div>
+
+<script>
+setInterval(function() {
+    alert("💊 Time to take your medicine!");
+
+    let msg = new SpeechSynthesisUtterance("Please take your medicine");
+
+    // 🔥 Voice Modulation
+    msg.rate = 0.8;   // speed (0.1 to 2)
+    msg.pitch = 1.2;  // pitch (0 to 2)
+    msg.volume = 1;   // volume (0 to 1)
+
+    speechSynthesis.speak(msg);
+
+}, 15000);
+</script>
+
+</body>
+</html>
